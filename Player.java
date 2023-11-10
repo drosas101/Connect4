@@ -9,6 +9,9 @@ public class Player {
     private String playerColor;
     private String playerName;
         
+    //contstructor for player we get the player's number,
+        //the color of their peice (for now it's just a string either X or O
+        //and their name.
     public Player(int playerNumber,String playerColor){
         this.playerNumber = playerNumber;
         this.playerColor = playerColor;
@@ -39,6 +42,7 @@ public class Player {
         return this.playerColor;
     }
     
+    //we announce the player's turn and ask them to select a column
     public int myTurn(){        
         System.out.printf("%s's turn.\n",this.playerName);
         System.out.print("Enter a column: ");
