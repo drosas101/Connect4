@@ -42,6 +42,7 @@ public class Player {
         return this.playerColor;
     }
     
+    //moved the turn to GameBoard. we might not need this anymore. 
     //we announce the player's turn and ask them to select a column
     public int myTurn(){        
         System.out.printf("%s's turn.\n",this.playerName);
@@ -50,3 +51,4 @@ public class Player {
         return input.nextInt();
     }
 }
+
