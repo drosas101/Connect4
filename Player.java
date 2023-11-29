@@ -51,4 +51,3 @@ public class Player {
         return input.nextInt();
     }
 }
-
