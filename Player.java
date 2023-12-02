@@ -1,5 +1,7 @@
 package connect4;
 import java.util.Scanner;
+import javax.swing.Icon;
+
 /**
  *
  * @author David Rosas
@@ -8,15 +10,26 @@ public class Player {
     private int playerNumber;
     private String playerColor;
     private String playerName;
+    Icon playerIcon;
         
     //contstructor for player we get the player's number,
         //the color of their peice (for now it's just a string either X or O
         //and their name.
-    public Player(int playerNumber,String playerColor){
+    public Player(int playerNumber,String playerColor,Icon playerIcon){
         this.playerNumber = playerNumber;
         this.playerColor = playerColor;
         this.playerName = "Player" + " " + playerNumber;
+        this.playerIcon = playerIcon;
     }
+    
+    public Icon getPlayerIcon(){
+        return this.playerIcon;
+    }
+    
+    public void setPlayerIcon(Icon playerIcon){
+        this.playerIcon = playerIcon;
+    }
+    
     
     public void setPlayerName(int playerNumber){
         this.playerName = "Player" + " " + playerNumber;

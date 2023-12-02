@@ -1,5 +1,8 @@
 package connect4;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -10,8 +13,12 @@ public class GameState {
     Player activePlayer;
     Player inactivePlayer;
     
-    Player player1 = new Player(1, "X");
-    Player player2 = new Player(2, "O");
+    private Icon bluePiece = new ImageIcon("C:\\Users\\mumbo\\OneDrive\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\bluePiece70x70.png");
+    private Icon redPiece = new ImageIcon("C:\\Users\\mumbo\\OneDrive\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\redPiece70x70.png");
+  
+    
+    Player player1 = new Player(1, "X",redPiece);
+    Player player2 = new Player(2, "O",bluePiece);
     
     public GameState(){
         activePlayer = player1;
@@ -40,7 +47,7 @@ public class GameState {
      public void playerTurn(int col) {        
         
         newBoard.placePiece(col, activePlayer.getPlayerColor());
-        endTurn();            
+        //endTurn();            
 
     }
 }

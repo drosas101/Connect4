@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package connect4;
 
 
-import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 
 
@@ -23,10 +17,7 @@ public class GameGUI extends javax.swing.JFrame {
     private GameState gameState;
 
     private javax.swing.JLabel[][] slot = new javax.swing.JLabel[6][7];
-    
-    private Icon bluePiece = new ImageIcon("C:\\Users\\mumbo\\OneDrive\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\bluePiece70x70.png");
-    private Icon redPiece = new ImageIcon("C:\\Users\\mumbo\\OneDrive\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\redPiece70x70.png");
-  
+
     /**
      * Creates new form StartScreen
      */
@@ -186,7 +177,7 @@ public class GameGUI extends javax.swing.JFrame {
         });
         selectionColumnPanel.add(column7);
 
-        gameboardPanel.setLayout(new java.awt.GridLayout(6, 7, 25, 25));
+        gameboardPanel.setLayout(new java.awt.GridLayout(6, 7, 13, 20));
 
         backMainMenuButton.setText("Main Menu");
         backMainMenuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -202,13 +193,13 @@ public class GameGUI extends javax.swing.JFrame {
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gamePanelLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
+                        .addContainerGap()
+                        .addComponent(backMainMenuButton))
+                    .addGroup(gamePanelLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(selectionColumnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gameboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(gamePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backMainMenuButton)))
+                            .addComponent(gameboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
@@ -258,48 +249,46 @@ public class GameGUI extends javax.swing.JFrame {
 
     private void column1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column1ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(1);
-        gameState.newBoard.getBoardState();
+        
+        placePiece(1);
+       
     }//GEN-LAST:event_column1ActionPerformed
 
     private void column2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column2ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(2);
-        gameState.newBoard.getBoardState();
+       
+        placePiece(2);
     }//GEN-LAST:event_column2ActionPerformed
 
     private void column3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column3ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(3);
-        gameState.newBoard.getBoardState();
+
+        placePiece(3);
     }//GEN-LAST:event_column3ActionPerformed
 
     private void column4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column4ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(4);
-        gameState.newBoard.getBoardState();
-        slot[0][3].setIcon(redPiece);
+
+        placePiece(4);
     }//GEN-LAST:event_column4ActionPerformed
 
     private void column5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column5ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(5);
-        gameState.newBoard.getBoardState();
+ 
         placePiece(5);
-        //JOptionPane.showMessageDialog(null, "hello world");
-        //slot[0][4].setIcon(bluePiece);
     }//GEN-LAST:event_column5ActionPerformed
 
     private void column6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column6ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(6);
-        gameState.newBoard.getBoardState();
+ 
+        placePiece(6);
+        checkWin();
     }//GEN-LAST:event_column6ActionPerformed
 
     private void column7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_column7ActionPerformed
         // TODO add your handling code here:
-        gameState.playerTurn(7);
-        gameState.newBoard.getBoardState();
+       
+        placePiece(7);
     }//GEN-LAST:event_column7ActionPerformed
 
     private void backMainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMainMenuButtonActionPerformed
@@ -322,15 +311,21 @@ public class GameGUI extends javax.swing.JFrame {
     private void placePiece(int column){
         int col = column - 1;
         
+        gameState.playerTurn(column);
+        //System.out.print(gameState.activePlayer.getPlayerColor());
+        //System.out.print(gameState.newBoard.checkForWin(gameState.activePlayer.getPlayerColor()));
+        gameState.newBoard.getBoardState();
+        
         //System.out.print(isColumnFull(col));
         if (!isColumnFull(col)){
             if (slot[0][col].getText() == null) {
                 for (int i = gameState.newBoard.getRows() - 1; i >= 0; i--) {
                     if (slot[i][col].getText() == null) {
-                        slot[i][col].setIcon(bluePiece);
+                        slot[i][col].setIcon(gameState.activePlayer.getPlayerIcon());
                         slot[i][col].setText("");
                         //we can temporarliy comment out break to fill
                         // a column faster for testing
+                        gameState.endTurn();
                         break;
                     }
                 }
@@ -339,7 +334,23 @@ public class GameGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, 
                                           "This Column is full.\nPlease choose a new column.", 
                                           "Whoops!", 
-                                          JOptionPane.WARNING_MESSAGE);        }    
+                                          JOptionPane.WARNING_MESSAGE);        
+            }
+        
+        System.out.print(gameState.newBoard.checkForWin(gameState.activePlayer.getPlayerColor()));
+        checkWin();
+        //System.out.print(gameState.newBoard.checkForWin(gameState.activePlayer.getPlayerColor()));
+        
+    }
+    
+    private void checkWin(){
+        
+        if (gameState.newBoard.checkForWin(gameState.activePlayer.getPlayerColor())){
+            JOptionPane.showMessageDialog(null, 
+                                          "WINNER!", 
+                                          "WINNER!", 
+                                          JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     /**

@@ -116,15 +116,15 @@ public class GameBoard {
     public boolean checkForWin(String color) {        
         // Check for vertical win
             for (int col = 0; col < columns; col++) {
-                for (int row = 0; row <= rows - 4; row++) {
+                for (int row = 0; row <= rows - 4 ; row++) {
                     if (mainBoard[row][col] != null &&
-                    mainBoard[row][col].getColor().equals(color) &&
-                    mainBoard[row + 1][col] != null &&
-                    mainBoard[row + 1][col].getColor().equals(color) &&
-                    mainBoard[row + 2][col] != null &&
-                    mainBoard[row + 2][col].getColor().equals(color) &&
-                    mainBoard[row + 3][col] != null &&
-                    mainBoard[row + 3][col].getColor().equals(color)) {
+                        mainBoard[row][col].getColor().equals(color) &&
+                        mainBoard[row + 1][col] != null &&
+                        mainBoard[row + 1][col].getColor().equals(color) &&
+                        mainBoard[row + 2][col] != null &&
+                        mainBoard[row + 2][col].getColor().equals(color) &&
+                        mainBoard[row + 3][col] != null &&
+                        mainBoard[row + 3][col].getColor().equals(color)) {
                     return true; // Vertical win
                     }
                 }
@@ -134,13 +134,13 @@ public class GameBoard {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col <= columns - 4; col++) {
                     if (mainBoard[row][col] != null &&
-                    mainBoard[row][col].getColor().equals(color) &&
-                    mainBoard[row][col + 1] != null &&
-                    mainBoard[row][col + 1].getColor().equals(color) &&
-                    mainBoard[row][col + 2] != null &&
-                    mainBoard[row][col + 2].getColor().equals(color) &&
-                    mainBoard[row][col + 3] != null &&
-                    mainBoard[row][col + 3].getColor().equals(color)) {
+                        mainBoard[row][col].getColor().equals(color) &&
+                        mainBoard[row][col + 1] != null &&
+                        mainBoard[row][col + 1].getColor().equals(color) &&
+                        mainBoard[row][col + 2] != null &&
+                        mainBoard[row][col + 2].getColor().equals(color) &&
+                        mainBoard[row][col + 3] != null &&
+                        mainBoard[row][col + 3].getColor().equals(color)) {
                     return true; // Horizontal win
                     }
                 }
@@ -150,13 +150,13 @@ public class GameBoard {
             for (int row = 0; row <= rows - 4; row++) {
                 for (int col = 0; col <= columns - 4; col++) {
                     if (mainBoard[row][col] != null &&
-                    mainBoard[row][col].getColor().equals(color) &&
-                    mainBoard[row + 1][col + 1] != null &&
-                    mainBoard[row + 1][col + 1].getColor().equals(color) &&
-                    mainBoard[row + 2][col + 2] != null &&
-                    mainBoard[row + 2][col + 2].getColor().equals(color) &&
-                    mainBoard[row + 3][col + 3] != null &&
-                    mainBoard[row + 3][col + 3].getColor().equals(color)) {
+                        mainBoard[row][col].getColor().equals(color) &&
+                        mainBoard[row + 1][col + 1] != null &&
+                        mainBoard[row + 1][col + 1].getColor().equals(color) &&
+                        mainBoard[row + 2][col + 2] != null &&
+                        mainBoard[row + 2][col + 2].getColor().equals(color) &&
+                        mainBoard[row + 3][col + 3] != null &&
+                        mainBoard[row + 3][col + 3].getColor().equals(color)) {
                     return true; // Diagonal win (top-left to bottom-right)
                     }
                 }
@@ -166,13 +166,13 @@ public class GameBoard {
             for (int row = 3; row < rows; row++) {
                 for (int col = 0; col <= columns - 4; col++) {
                     if (mainBoard[row][col] != null &&
-                    mainBoard[row][col].getColor().equals(color) &&
-                    mainBoard[row - 1][col + 1] != null &&
-                    mainBoard[row - 1][col + 1].getColor().equals(color) &&
-                    mainBoard[row - 2][col + 2] != null &&
-                    mainBoard[row - 2][col + 2].getColor().equals(color) &&
-                    mainBoard[row - 3][col + 3] != null &&
-                    mainBoard[row - 3][col + 3].getColor().equals(color)) {
+                        mainBoard[row][col].getColor().equals(color) &&
+                        mainBoard[row - 1][col + 1] != null &&
+                        mainBoard[row - 1][col + 1].getColor().equals(color) &&
+                        mainBoard[row - 2][col + 2] != null &&
+                        mainBoard[row - 2][col + 2].getColor().equals(color) &&
+                        mainBoard[row - 3][col + 3] != null &&
+                        mainBoard[row - 3][col + 3].getColor().equals(color)) {
                     return true; // Diagonal win (bottom-left to top-right)
                     }
                 }

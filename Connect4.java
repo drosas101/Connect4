@@ -17,8 +17,8 @@ public class Connect4 {
         newBoard.getBoardState();
 
         //creating player objects
-        Player player1 = new Player(1, "X");
-        Player player2 = new Player(2, "O");
+        Player player1 = new Player(1, "X",null);
+        Player player2 = new Player(2, "O",null);
         
        
 
