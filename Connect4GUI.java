@@ -1,6 +1,6 @@
 package connect4;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -76,7 +76,6 @@ public class Connect4GUI extends javax.swing.JFrame {
         StartGameButton.setContentAreaFilled(false);
         StartGameButton.setMaximumSize(new java.awt.Dimension(50, 20));
         StartGameButton.setMinimumSize(new java.awt.Dimension(50, 20));
-        StartGameButton.setPreferredSize(new java.awt.Dimension(100, 30));
         StartGameButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/connect4/startButtonRollover.png"))); // NOI18N
         StartGameButton.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -287,6 +286,7 @@ public class Connect4GUI extends javax.swing.JFrame {
                 slot[i][j] = new javax.swing.JLabel("",javax.swing.JLabel.CENTER);
                 slot[i][j].setText(null);
                 gameboardPanel.add(slot[i][j]);
+                slot[i][j].setBackground(Color.white);
                 slot[i][j].setOpaque(true);
                 slot[i][j].repaint();
                 
@@ -437,7 +437,7 @@ public class Connect4GUI extends javax.swing.JFrame {
             }
         }
     }
-    
+   
     private void resetGame() {
     
     gameState = new GameState();
