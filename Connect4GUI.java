@@ -14,7 +14,7 @@ public class Connect4GUI extends javax.swing.JFrame {
     private GameState gameState;
 
     private javax.swing.JLabel[][] slot = new javax.swing.JLabel[6][7];
-    private Icon celebration = new ImageIcon("C:\\Users\\mumbo\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\Celebration.gif");
+    private Icon celebration = new ImageIcon(getClass().getResource("/connect4/Celebration.gif"));
 
     /**
      * Creates new form StartScreen
@@ -48,6 +48,7 @@ public class Connect4GUI extends javax.swing.JFrame {
         column7 = new javax.swing.JButton();
         gameboardPanel = new javax.swing.JPanel();
         backMainMenuButton = new javax.swing.JButton();
+        playerTurnText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -254,6 +255,8 @@ public class Connect4GUI extends javax.swing.JFrame {
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(backMainMenuButton)
+                .addGap(183, 183, 183)
+                .addComponent(playerTurnText, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
@@ -264,7 +267,9 @@ public class Connect4GUI extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(gameboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(backMainMenuButton)
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backMainMenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(playerTurnText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -279,20 +284,19 @@ public class Connect4GUI extends javax.swing.JFrame {
         gameState = new GameState();
         menuPanel.setVisible(false);
         gamePanel.setVisible(true);
+        playerTurnText();
 
         //add slots for the pieces to be places on the gameboard
         for (int i = 0; i < gameState.newBoard.getRows(); i++) {
             for (int j = 0; j < gameState.newBoard.getColumns(); j++) {
-                slot[i][j] = new javax.swing.JLabel("",javax.swing.JLabel.CENTER);
+                slot[i][j] = new javax.swing.JLabel("", javax.swing.JLabel.CENTER);
                 slot[i][j].setText(null);
                 gameboardPanel.add(slot[i][j]);
                 slot[i][j].setBackground(Color.white);
                 slot[i][j].setOpaque(true);
                 slot[i][j].repaint();
-                
             }
         }
-
     }//GEN-LAST:event_StartGameButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
@@ -360,10 +364,10 @@ public class Connect4GUI extends javax.swing.JFrame {
     private void placePiece(int column) {
         // we subtract 1 from the column so we're in the right place in the array
         int col = column - 1;
-        
+
         //we are still using the ASCII version of the game to mirror the GUI 
-            //so we can track the state of the board. so whenever we place a piece
-            //we also place is on the ASCII version
+        //so we can track the state of the board. so whenever we place a piece
+        //we also place is on the ASCII version
         gameState.playerTurn(column);
         gameState.newBoard.getBoardState();
 
@@ -374,13 +378,15 @@ public class Connect4GUI extends javax.swing.JFrame {
                     if (slot[i][col].getText() == null) {
                         //set the player piece as the icon to the JLabel
                         slot[i][col].setIcon(gameState.activePlayer.getPlayerIcon());
-             
+
                         //set the text to blank so the spot is no longer null
                         slot[i][col].setText("");
                         //we can temporarliy comment out break to fill
                         // a column faster for testing
                         checkBoard();
                         gameState.endTurn();
+                        playerTurnText();
+
                         break;
                     }
                 }
@@ -391,23 +397,21 @@ public class Connect4GUI extends javax.swing.JFrame {
                     "Whoops!",
                     JOptionPane.WARNING_MESSAGE);
         }
-        
-        
-        
+
     }
 
     private void checkBoard() {
         if (gameState.newBoard.isBoardFull()) {
             Object[] options = {"Main Menu", "Exit"};
             int choice = JOptionPane.showOptionDialog(
-                null,
-                "The Board is Full!",
-                "Game Over",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                options,
-                options[0]
+                    null,
+                    "The Board is Full!",
+                    "Game Over",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]
             );
 
             if (choice == JOptionPane.YES_OPTION) {
@@ -420,14 +424,14 @@ public class Connect4GUI extends javax.swing.JFrame {
         if (gameState.newBoard.checkForWin(gameState.activePlayer.getPlayerColor())) {
             Object[] options = {"Main Menu", "Exit"};
             int choice = JOptionPane.showOptionDialog(
-                null,
-                gameState.activePlayer.getPlayerName() + " wins!\n",
-                "Ladies and Gentlemen, We have a Winner!",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                celebration,
-                options,
-                options[0]
+                    null,
+                    gameState.activePlayer.getPlayerName() + " wins!\n",
+                    "Ladies and Gentlemen, We have a Winner!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    celebration,
+                    options,
+                    options[0]
             );
 
             if (choice == JOptionPane.YES_OPTION) {
@@ -437,20 +441,29 @@ public class Connect4GUI extends javax.swing.JFrame {
             }
         }
     }
-   
+
     private void resetGame() {
-    
-    gameState = new GameState();
-    menuPanel.setVisible(true);
-    gamePanel.setVisible(false);
-    
-    for (int i = 0; i < gameState.newBoard.getRows(); i++) {
-        for (int j = 0; j < gameState.newBoard.getColumns(); j++) {
-            gameboardPanel.remove(slot[i][j]);
+
+        gameState = new GameState();
+        menuPanel.setVisible(true);
+        gamePanel.setVisible(false);
+
+        for (int i = 0; i < gameState.newBoard.getRows(); i++) {
+            for (int j = 0; j < gameState.newBoard.getColumns(); j++) {
+                gameboardPanel.remove(slot[i][j]);
+            }
         }
+
     }
-    
-}
+
+    private void playerTurnText() {
+        if (gameState.activePlayer.getPlayerNumber() == 1) {
+            playerTurnText.setIcon(new ImageIcon(getClass().getResource("/connect4/Player1Turn.png")));
+        } else if (gameState.activePlayer.getPlayerNumber() == 2) {
+            playerTurnText.setIcon(new ImageIcon(getClass().getResource("/connect4/Player2Turn.png")));
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -508,6 +521,7 @@ public class Connect4GUI extends javax.swing.JFrame {
     private javax.swing.JPanel gameboardPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel playerTurnText;
     private javax.swing.JPanel selectionColumnPanel;
     // End of variables declaration//GEN-END:variables
 }
