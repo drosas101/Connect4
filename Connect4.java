@@ -9,7 +9,7 @@ public class Connect4 {
     public static void main(String[] args) {
         
         //display the start screen
-        new GameGUI().setVisible(true);
+        //new GameGUI().setVisible(true);
         
         //creating a new gameboard    
         GameBoard newBoard = new GameBoard();

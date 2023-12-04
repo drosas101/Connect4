@@ -13,8 +13,8 @@ public class GameState {
     Player activePlayer;
     Player inactivePlayer;
     
-    private Icon bluePiece = new ImageIcon("C:\\Users\\mumbo\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\bluePiece70x70.png");
-    private Icon redPiece = new ImageIcon("C:\\Users\\mumbo\\Documents\\NetBeansProjects\\Connect4\\src\\connect4\\redPiece70x70.png");
+    private Icon bluePiece = new ImageIcon(getClass().getResource("/connect4/bluePiece70x70.png"));
+    private Icon redPiece = new ImageIcon(getClass().getResource("/connect4/redPiece70x70.png"));
   
     
     Player player1 = new Player(1, "X",bluePiece);

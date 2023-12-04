@@ -242,6 +242,8 @@ public class Connect4GUI extends javax.swing.JFrame {
             }
         });
 
+        playerTurnText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
         gamePanelLayout.setHorizontalGroup(
@@ -255,8 +257,8 @@ public class Connect4GUI extends javax.swing.JFrame {
             .addGroup(gamePanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(backMainMenuButton)
-                .addGap(183, 183, 183)
-                .addComponent(playerTurnText, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(playerTurnText, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gamePanelLayout.setVerticalGroup(
@@ -267,9 +269,9 @@ public class Connect4GUI extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(gameboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(backMainMenuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(playerTurnText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backMainMenuButton)
+                    .addComponent(playerTurnText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -459,8 +461,10 @@ public class Connect4GUI extends javax.swing.JFrame {
     private void playerTurnText() {
         if (gameState.activePlayer.getPlayerNumber() == 1) {
             playerTurnText.setIcon(new ImageIcon(getClass().getResource("/connect4/Player1Turn.png")));
+
         } else if (gameState.activePlayer.getPlayerNumber() == 2) {
             playerTurnText.setIcon(new ImageIcon(getClass().getResource("/connect4/Player2Turn.png")));
+
         }
 
     }

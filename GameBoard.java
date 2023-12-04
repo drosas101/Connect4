@@ -7,13 +7,12 @@ import java.util.Scanner;
  * @author David Rosas
  */
 public class GameBoard {
-   
 
     private int rows = 6;
     private int columns = 7;
     private boolean gameOver = false;
     private final Piece[][] mainBoard = new Piece[rows][columns];
-    
+
     //get and set methods
     public int getRows() {
         return rows;
@@ -61,18 +60,18 @@ public class GameBoard {
                     mainBoard[i][col] = new Piece();
                     mainBoard[i][col].setColor(color);
                     //we can temporarliy comment out break to fill
-                        // a column faster for testing
+                    // a column faster for testing
                     break;
                 }
             }
         }
-        
+
     }
 
     //iterates through both dimensions of the array
     //if the value is null then we print _ , otherwise we read the color
     public void getBoardState() {
-        
+
         for (int i = 0; i < rows; i++) {
             System.out.print("|");
             for (int j = 0; j < columns; j++) {
@@ -113,82 +112,83 @@ public class GameBoard {
         return mainBoard[0][(inCol - 1)] == null;
     }
 
-    public boolean checkForWin(String color) {        
+    public boolean checkForWin(String color) {
         // Check for vertical win
-            for (int col = 0; col < columns; col++) {
-                for (int row = 0; row <= rows - 4 ; row++) {
-                    if (mainBoard[row][col] != null &&
-                        mainBoard[row][col].getColor().equals(color) &&
-                        mainBoard[row + 1][col] != null &&
-                        mainBoard[row + 1][col].getColor().equals(color) &&
-                        mainBoard[row + 2][col] != null &&
-                        mainBoard[row + 2][col].getColor().equals(color) &&
-                        mainBoard[row + 3][col] != null &&
-                        mainBoard[row + 3][col].getColor().equals(color)) {
-                    return true; // Vertical win
-                    }
-                }
-            }
-
-            // Check for horizontal win
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col <= columns - 4; col++) {
-                    if (mainBoard[row][col] != null &&
-                        mainBoard[row][col].getColor().equals(color) &&
-                        mainBoard[row][col + 1] != null &&
-                        mainBoard[row][col + 1].getColor().equals(color) &&
-                        mainBoard[row][col + 2] != null &&
-                        mainBoard[row][col + 2].getColor().equals(color) &&
-                        mainBoard[row][col + 3] != null &&
-                        mainBoard[row][col + 3].getColor().equals(color)) {
-                    return true; // Horizontal win
-                    }
-                }
-            }
-
-            // Check for diagonal win (top-left to bottom-right)
+        for (int col = 0; col < columns; col++) {
             for (int row = 0; row <= rows - 4; row++) {
-                for (int col = 0; col <= columns - 4; col++) {
-                    if (mainBoard[row][col] != null &&
-                        mainBoard[row][col].getColor().equals(color) &&
-                        mainBoard[row + 1][col + 1] != null &&
-                        mainBoard[row + 1][col + 1].getColor().equals(color) &&
-                        mainBoard[row + 2][col + 2] != null &&
-                        mainBoard[row + 2][col + 2].getColor().equals(color) &&
-                        mainBoard[row + 3][col + 3] != null &&
-                        mainBoard[row + 3][col + 3].getColor().equals(color)) {
+                if (mainBoard[row][col] != null
+                        && mainBoard[row][col].getColor().equals(color)
+                        && mainBoard[row + 1][col] != null
+                        && mainBoard[row + 1][col].getColor().equals(color)
+                        && mainBoard[row + 2][col] != null
+                        && mainBoard[row + 2][col].getColor().equals(color)
+                        && mainBoard[row + 3][col] != null
+                        && mainBoard[row + 3][col].getColor().equals(color)) {
+                    return true; // Vertical win
+                }
+            }
+        }
+
+        // Check for horizontal win
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col <= columns - 4; col++) {
+                if (mainBoard[row][col] != null
+                        && mainBoard[row][col].getColor().equals(color)
+                        && mainBoard[row][col + 1] != null
+                        && mainBoard[row][col + 1].getColor().equals(color)
+                        && mainBoard[row][col + 2] != null
+                        && mainBoard[row][col + 2].getColor().equals(color)
+                        && mainBoard[row][col + 3] != null
+                        && mainBoard[row][col + 3].getColor().equals(color)) {
+                    return true; // Horizontal win
+                }
+            }
+        }
+
+        // Check for diagonal win (top-left to bottom-right)
+        for (int row = 0; row <= rows - 4; row++) {
+            for (int col = 0; col <= columns - 4; col++) {
+                if (mainBoard[row][col] != null
+                        && mainBoard[row][col].getColor().equals(color)
+                        && mainBoard[row + 1][col + 1] != null
+                        && mainBoard[row + 1][col + 1].getColor().equals(color)
+                        && mainBoard[row + 2][col + 2] != null
+                        && mainBoard[row + 2][col + 2].getColor().equals(color)
+                        && mainBoard[row + 3][col + 3] != null
+                        && mainBoard[row + 3][col + 3].getColor().equals(color)) {
                     return true; // Diagonal win (top-left to bottom-right)
-                    }
                 }
             }
+        }
 
-            // Check for diagonal win (bottom-left to top-right)
-            for (int row = 3; row < rows; row++) {
-                for (int col = 0; col <= columns - 4; col++) {
-                    if (mainBoard[row][col] != null &&
-                        mainBoard[row][col].getColor().equals(color) &&
-                        mainBoard[row - 1][col + 1] != null &&
-                        mainBoard[row - 1][col + 1].getColor().equals(color) &&
-                        mainBoard[row - 2][col + 2] != null &&
-                        mainBoard[row - 2][col + 2].getColor().equals(color) &&
-                        mainBoard[row - 3][col + 3] != null &&
-                        mainBoard[row - 3][col + 3].getColor().equals(color)) {
+        // Check for diagonal win (bottom-left to top-right)
+        for (int row = 3; row < rows; row++) {
+            for (int col = 0; col <= columns - 4; col++) {
+                if (mainBoard[row][col] != null
+                        && mainBoard[row][col].getColor().equals(color)
+                        && mainBoard[row - 1][col + 1] != null
+                        && mainBoard[row - 1][col + 1].getColor().equals(color)
+                        && mainBoard[row - 2][col + 2] != null
+                        && mainBoard[row - 2][col + 2].getColor().equals(color)
+                        && mainBoard[row - 3][col + 3] != null
+                        && mainBoard[row - 3][col + 3].getColor().equals(color)) {
                     return true; // Diagonal win (bottom-left to top-right)
-                    }
                 }
             }
+        }
 
-            return false; // No win found
-        
+        return false; // No win found
+
     }
 
     public boolean isBoardFull() {
         // need logic to check for win
-        for (int i = 0; i < columns; i++)
-            if(mainBoard[0][i] == null){
+        for (int i = 0; i < columns; i++) {
+            if (mainBoard[0][i] == null) {
                 return false;
-            } 
-        return true;        
+            }
+        }
+        return true;
     }
 
 }
